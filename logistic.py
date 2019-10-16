@@ -14,6 +14,7 @@ def interception():
 
 def yhat():
     y = 0
+    p = e^interception() + slope() / 1+ e^interception() + slope() ;
     return 0
 
 def gradient():
