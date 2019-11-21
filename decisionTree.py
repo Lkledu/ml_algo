@@ -1,5 +1,5 @@
 class Node:
-    def __init__(self, data, isQuestion = None):
+    def __init__(self, data, isQuestion = False):
 
         self.left = None
         self.right = None
@@ -14,30 +14,33 @@ root = Node("tem asa?", True)
 print("#######")
 
 def runTree(currentNode):
+    if (currentNode.right is not None):
+        print('foi')
     if (currentNode is not None):
         if(currentNode.isQuestion == True):
-            print("\n")
+            print("\n\t")
             print(currentNode.data)
-            answer = input('\nEnter your input(1-yes, 0-no):\n')
-            if(answer == 1):
+            answer = input("\nEnter your input(1-yes, 0-no):\n")
+            if(answer == '1'):
                 runTree(currentNode.right)
-            else:
+            elif(answer == '0'):
                 runTree(currentNode.left)
     
         else:
-                print("\n")
+                print("\n\t")
                 print(currentNode.data)
         
     else:
-        print("\n\tERROR: node isn't a question and not has a label yet.\n\n")
+        print("\n###########################\nERROR: node isn't a question and not has a label yet.\n###########################\n")
         answer = input("Want to put a question(1) or a label(0)?\n")
-        if(answer == 1):
-            question = input("write your question")
+        if(answer == '1'):
+            question = input("write your question\n")
             currentNode = Node(question, True)
-        else:
-            label = input("write your label")
+            print(currentNode)
+        elif(answer == '0'):
+            label = input("write your label\n")
             currentNode = Node(label, False)
-        print("we'll run the decisionTree again")
+        print("\n\nrunning the decisionTree again\n###########################\n")
         runTree(root)
         
 runTree(root)
