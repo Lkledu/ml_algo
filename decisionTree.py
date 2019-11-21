@@ -18,7 +18,7 @@ def runTree(currentNode):
         if(currentNode.isQuestion == True):
             print("\n")
             print(currentNode.data)
-            answer = input('Enter your input(1-yes, 0-no):')
+            answer = input('\nEnter your input(1-yes, 0-no):\n')
             if(answer == 1):
                 runTree(currentNode.right)
             else:
@@ -29,15 +29,14 @@ def runTree(currentNode):
                 print(currentNode.data)
         
     else:
-        print("ERROR: node isn't a question and not has a label yet.")
-        answer =input("Want to put a question(1) or a label(0)?")
-        if(answer == 1){
-            currentNode.isQuestion = True
-            currentNode.data = input("write your question")
-        }else{
-            currentNode.isQuestion = False
-            currentNode.data = input("write your label")
-        }
+        print("\n\tERROR: node isn't a question and not has a label yet.\n\n")
+        answer = input("Want to put a question(1) or a label(0)?\n")
+        if(answer == 1):
+            question = input("write your question")
+            currentNode = Node(question, True)
+        else:
+            label = input("write your label")
+            currentNode = Node(label, False)
         print("we'll run the decisionTree again")
         runTree(root)
         
