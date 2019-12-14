@@ -1,0 +1,3 @@
+Naive Bayes
+Perseptron
+Logistic Regression
