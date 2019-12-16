@@ -1,18 +1,27 @@
 import math
 
-class dataset:
-    salario: bool #alto ou baixo
-    localizacao: bool #perto ou longe
-    funcao: bool #interessante ou desinteressante
-    decisao: bool #sim ou não
+class dataset():
+    def __init__(self, salario:str, localizacao:str, funcao:str, decisao:str):
+        self.salario = salario  #alto ou baixo
+        self.localizacao = localizacao  #perto ou longe
+        self.funcao = funcao  #interessante ou desinteressante
+        self.decisao = decisao  #sim ou não
 
 dt = []
-dt.append(True, True, False, True)
-dt.append(False, False, True, False)
-dt.append(True, True, False, False)
-dt.append(False, False, False, True)
-dt.append(True, True, True, True)
-dt.append(False, False, False, False)
+dt.append(dataset('alto', 'perto', 'desinteressante', 'sim'))
+dt.append(dataset('baixo', 'longe', 'interessante', 'não'))
+dt.append(dataset('alto', 'perto', 'desinteressante', 'não'))
+dt.append(dataset('baixo', 'longe', 'desinteressante', 'sim'))
+dt.append(dataset('alto', 'perto', 'interessante', 'sim'))
+dt.append(dataset('baixo', 'longe', 'desinteressante', 'não'))
+
+def organize(attrib:str, objArray: []):
+    listOrganized = []
+    if hasattr(objArray[0], attrib):
+        for x in objArray:
+            listOrganized.append(getattr(x, attrib))
+    
+    return listOrganized
 
 def peso(label: str, column: list):
     countLabel = 0
@@ -20,14 +29,18 @@ def peso(label: str, column: list):
         if(x == label):
             countLabel+=1
 
-    return countLabel/column.count()
+    return countLabel/len(column)
 
 def entropia(peso:int):
-    entrop = 0
-    for x in peso:
-        entrop += x* math.log2(x)
+    entrop = -(peso * math.log2(peso))
 
     return entrop
 
 def ganhoInfo(columPai: list, columnFilho:list):
     return entropia(columPai) - peso("label",columnFilho) * entropia(columnFilho)
+
+target = organize('decisao', dt)
+
+entropiaTarget = entropia(peso('sim', target)) + entropia(peso('não', target))
+
+print(entropiaTarget)
