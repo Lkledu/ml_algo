@@ -16,6 +16,7 @@ dt.append(dataset('alto', 'perto', 'interessante', 'sim'))
 dt.append(dataset('baixo', 'longe', 'desinteressante', 'não'))
 #dt.append(dataset('alto', 'perto', 'interessante', 'sim'))
 
+#retorna lista com apenas um atributo de cada objeto
 def organize(attrib:str, objArray: []):
     listOrganized = []
     if hasattr(objArray[0], attrib):
@@ -24,7 +25,7 @@ def organize(attrib:str, objArray: []):
     return listOrganized
 
 
-
+#retorna lista com labels aplicando distinct
 def getLabels(column: [], attr:str):
     labels = []
     count = 0
@@ -41,7 +42,7 @@ def getLabels(column: [], attr:str):
     return labels
 
 
-
+#calcula peso da coluna
 def peso(label: str, labelTarget: str, column: list, attr:str):
     countLabel = 0
     for x in column:
@@ -50,7 +51,7 @@ def peso(label: str, labelTarget: str, column: list, attr:str):
     return countLabel/len(column)
 
 
-
+#calcula entropia de uma coluna especifica
 def entropia(column: [], dt: [], attr:str):
     entrop = 0
     labels = getLabels(dt, attr)
@@ -62,7 +63,7 @@ def entropia(column: [], dt: [], attr:str):
     return entrop
 
 
-
+#calcula ganho de info de coluna especifica
 def ganhoInfo(entroT: float, entroC: float, dt: [], attr: str):
     gi = 0
     label = getLabels(dt, attr)
